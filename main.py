@@ -41,5 +41,18 @@ def list_prof(q):
     return render_template('list.html', prof=prof_list, q=q)
 
 
+@app.route('/distribution')
+def distribution():
+    staff = [
+        "Ридли Скотт",
+        "Энди Уир",
+        "Марк Уотни",
+        "Венката Капур",
+        "Тедди Сандерс",
+        "Шон Бин",
+    ]
+    return render_template("staff.html", staff=staff)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')

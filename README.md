@@ -11,3 +11,6 @@ http://127.0.0.1:8080/training/ученый
 http://127.0.0.1:8080/list_prof/ol
 http://127.0.0.1:8080/list_prof/ul
 http://127.0.0.1:8080/list_prof/qqqqqkshfdkjl
+
+шестая задача:
+http://127.0.0.1:8080/distribution
