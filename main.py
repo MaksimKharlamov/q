@@ -16,5 +16,30 @@ def training(prof):
     return render_template('science.html')
 
 
+@app.route('/list_prof/<q>')
+def list_prof(q):
+    if q not in ('ol', 'ul'):
+        return render_template('error.html')
+    prof_list = [
+        "инженер-исследователь",
+        "пилот",
+        "строитель",
+        "экзобиолог",
+        "врач",
+        "инженер по терраформированию",
+        "климатолог",
+        "специалист по радиационной защите",
+        "астрогеолог",
+        "гляциолог",
+        "инженер жизнеобеспечения",
+        "метеоролог",
+        "оператор марсохода",
+        "киберинженер",
+        "штурман",
+        "пилот дронов",
+    ]
+    return render_template('list.html', prof=prof_list, q=q)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
