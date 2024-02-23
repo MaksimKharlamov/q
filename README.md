@@ -14,3 +14,9 @@ http://127.0.0.1:8080/list_prof/qqqqqkshfdkjl
 
 шестая задача:
 http://127.0.0.1:8080/distribution
+
+седьмая задача:
+http://127.0.0.1:8080/table/female/10
+http://127.0.0.1:8080/table/male/10
+http://127.0.0.1:8080/table/female/100
+http://127.0.0.1:8080/table/male/100

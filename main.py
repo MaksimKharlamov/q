@@ -54,5 +54,20 @@ def distribution():
     return render_template("staff.html", staff=staff)
 
 
+@app.route('/table/<sex>/<age>')
+def table(sex, age):
+    images = ["https://img.razrisyika.ru/img/60/1200/237793-udivitelnye-raskraski-prishelcev-dlya-detey.jpg",
+              "https://narisyu.cdnbro.com/posts/724536-monstrik-raskraska-36.jpg",
+              "https://coloringpagesonly.com/wp-content/uploads/2021/12/Aliens-Toy-Story-Drawing.png",
+              "https://raskrasil.com/wp-content/uploads/Raskrasil.com-Alien-8-631x900.jpg"]
+    index = 0
+    colors = ["#55f", "#f55", "#00f", "#f00"]
+    if int(age) > 21:
+        index += 2
+    if sex == "female":
+        index += 1
+    return render_template("table.html", color=colors[index], image=images[index])
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
