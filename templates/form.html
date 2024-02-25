@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="header">Анекта претендента</h1>
+<h4 class="header">на участие в миссии</h4>
+<form action="/answer" class="login-form" method="POST">
+    <input type="text" class="form-control" placeholder="Введите фамилию" name="surname"><br>
+    <input type="text" class="form-control" placeholder="Введите имя" name="name"><br>
+    <input type="text" class="form-control" placeholder="Введите адрес почты" name="mail"><br>
+    <label for="education">Какое у Вас образование?</label><br>
+    <select name="education" id="education" class="form-control">
+        <option value="начальное">Начальное</option>
+        <option value="среднее">Среднее</option>
+        <option value="общее">Общее</option>
+        <option value="высшее">Высшее</option>
+    </select>
+    <div class="form-group">
+        <label for="form-check">Какие у Вас есть профессии?</label>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="explorer" value="инженер-исследователь">
+            <label class="form-check-label" for="explorer">Инженер-исследователь</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="builder" value="инженер-строитель">
+            <label class="form-check-label" for="builder">Инженер-строитель</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="pilot" value="пилот">
+            <label class="form-check-label" for="pilot">Пилот</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="weather" value="метеоролог">
+            <label class="form-check-label" for="weather">Метеоролог</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="life" value="инженер по жизнеобеспечению">
+            <label class="form-check-label" for="life">Инженер по жизнеобеспечению</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="radiation" value="инженер по радиационной защите">
+            <label class="form-check-label" for="radiation">Инженер по радиационной защите</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="doctor" value="врач">
+            <label class="form-check-label" for="doctor">Врач</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="profession" id="biologist" value="экзобиолог">
+            <label class="form-check-label" for="biologist">Экзобиолог</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="form-check">Укажите пол</label>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="sex" id="male" value="male" checked>
+            <label class="form-check-label" for="male">Мужской</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="sex" id="female" value="female">
+            <label class="form-check-label" for="female">Женский</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="motivation">Почему Вы хотите принять участие в миссии?</label>
+        <textarea class="form-control" id="motivation" name="motivation"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="photo">Приложите фотографию</label>
+        <input type="file" class="form-control-file" id="photo" name="file">
+    </div>
+    <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" id="readyToStay" name="ready">
+        <label class="form-check-label" for="readyToStay">Готовы остаться на Марсе?</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
+{% endblock %}

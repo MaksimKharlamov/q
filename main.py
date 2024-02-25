@@ -69,5 +69,25 @@ def table(sex, age):
     return render_template("table.html", color=colors[index], image=images[index])
 
 
+@app.route('/astronaut_selection')
+def form():
+    return render_template('form.html')
+
+
+@app.route('/answer', methods=['POST', 'GET'])
+@app.route('/auto_answer', methods=['POST', 'GET'])
+def answer():
+    d = {}
+    d['title'] = "Анкета"
+    d['name'] = request.form['name']
+    d['surname'] = request.form['surname']
+    d['education'] = request.form['education']
+    d['profession'] = request.form['profession']
+    d['sex'] = request.form['sex']
+    d['motivation'] = request.form['motivation']
+    d['ready'] = True if request.form.get('ready', 0) else False
+    return render_template("auto_answer.html", **d)
+
+
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
