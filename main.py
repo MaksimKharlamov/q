@@ -1,9 +1,31 @@
 from flask import *
 
+from data import db_session
+from data.users import User
+from data.jobs import Job
+
 app = Flask(__name__)
 
 
-@app.route('/<title>')
+@app.route('/')
+def q():
+    db_sess = db_session.create_session()
+    data = db_sess.query(Job).all()
+    jobs = []
+    for i in data:
+        job = [''] * 6
+        job[-1] = i.id
+        job[0] = i.job
+        leader = db_sess.query(User).filter(User.id == i.team_leader).first()
+        job[1] = leader.surname + ' ' + leader.name
+        job[2] = f"{i.work_size} hours"
+        job[3] = i.collaborators
+        job[4] = "Is " + ("not " if not i.is_finished else '') + "finished"
+        jobs.append(job)
+    print(jobs)
+    return render_template('jobs.html', jobs=jobs)
+
+
 @app.route('/index/<title>')
 def index(title):
     return render_template("base.html", title=title)
@@ -89,5 +111,10 @@ def answer():
     return render_template("auto_answer.html", **d)
 
 
+def main():
+    db_session.global_init('db/mars_explorers.db')
+    app.run(port=8080, host='127.0.0.1', debug=True)
+
+
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    main()
