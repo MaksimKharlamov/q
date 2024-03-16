@@ -9,22 +9,26 @@ db_sess = db_session.create_session()
 u1 = User(name="Ridley", surname="Scott",
           age=21, position="captain",
           speciality="engineer", address="module_1",
-          email="1@ya.ru", hashed_password="password1")
+          email="1@ya.ru")
+u1.set_password('password1')
 
 u2 = User(name="John", surname="Bryan",
           age=52, position="officer",
           speciality="biologist", address="module_2",
-          email="2@ya.ru", hashed_password="password2")
+          email="2@ya.ru")
+u2.set_password('password2')
 
 u3 = User(name="Ryan", surname="Ingram",
           age=24, position="sergeant",
           speciality="chemist", address="module_3",
-          email="3@ya.ru", hashed_password="password3")
+          email="3@ya.ru")
+u3.set_password('password3')
 
 u4 = User(name="Mark", surname="Howard",
           age=37, position="major",
           speciality="physicist", address="module_4",
-          email="4@ya.ru", hashed_password="password4")
+          email="4@ya.ru")
+u4.set_password('password4')
 
 j1 = Job(team_leader=1, job="Deployment of residential modules 1 and 2",
          work_size=15, collaborators="2, 3",
