@@ -139,7 +139,7 @@ def answer():
 
 def main():
     db_session.global_init('db/mars_explorers.db')
-    app.run(port=8080, host='127.0.0.1', debug=True)
+    app.run(port=8080, host='127.0.0.1')
 
 
 if __name__ == '__main__':
