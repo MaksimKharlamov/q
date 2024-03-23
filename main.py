@@ -4,6 +4,7 @@ from flask_login import *
 from data import db_session
 from data.jobs import Job
 from data.loginform import LoginForm
+from data.jobform import JobForm
 from data.users import User
 
 app = Flask(__name__)
@@ -33,6 +34,21 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+@app.route('/addjob', methods=['GET', 'POST'])
+def addjob():
+    form = JobForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        job = Job()
+        job.team_leader = form.team_leader.data
+        job.job = form.job.data
+        job.work_size = form.work_size.data
+        job.collaborators = form.collaborators.data
+        job.is_finished = form.is_finished.data
+        db_sess.merge(job)
+        db_sess.commit()
+        return redirect('/')
+    return render_template('addjob.html', title='Adding a job', form = form)
 
 @app.route('/')
 def q():
