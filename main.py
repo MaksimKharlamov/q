@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandex_lyceum_secret_key'
 login_manager = LoginManager()
 login_manager.init_app(app)
+db_session.global_init('db/mars_explorers.db')
 
 
 @login_manager.user_loader
@@ -138,7 +139,6 @@ def answer():
 
 
 def main():
-    db_session.global_init('db/mars_explorers.db')
     app.run(port=8080, host='127.0.0.1')
 
 
