@@ -2,9 +2,9 @@ from flask import *
 from flask_login import *
 
 from data import db_session
+from data.jobform import JobForm
 from data.jobs import Job
 from data.loginform import LoginForm
-from data.jobform import JobForm
 from data.users import User
 
 app = Flask(__name__)
@@ -34,6 +34,14 @@ def login():
                                form=form)
     return render_template('login.html', title='Авторизация', form=form)
 
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect("/")
+
+
 @app.route('/addjob', methods=['GET', 'POST'])
 def addjob():
     form = JobForm()
@@ -48,7 +56,8 @@ def addjob():
         db_sess.merge(job)
         db_sess.commit()
         return redirect('/')
-    return render_template('addjob.html', title='Adding a job', form = form)
+    return render_template('addjob.html', title='Adding a job', form=form)
+
 
 @app.route('/')
 def q():
