@@ -3,7 +3,7 @@ from wtforms import *
 from wtforms.validators import *
 
 
-class LoginForm(FlaskForm):
+class JobForm(FlaskForm):
     job = StringField('Job Title', validators=[DataRequired()])
     team_leader = IntegerField('Team Leader id', validators=[DataRequired()])
     work_size = IntegerField('Work Size', validators=[DataRequired()])
