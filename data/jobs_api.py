@@ -48,7 +48,7 @@ def create_job():
     return jsonify({'id': job.id})
 
 
-@blueprint.route('/api/jobs/<int:job_id>', methods=['DELETE'])
+@blueprint.route('/api/jobs/<job_id>', methods=['DELETE'])
 def delete_news(job_id):
     db_sess = db_session.create_session()
     job = db_sess.query(Job).get(job_id)
