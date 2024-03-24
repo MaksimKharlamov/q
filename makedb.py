@@ -1,8 +1,12 @@
 import datetime
+import os
 
 from data import db_session
 from data.jobs import Job
 from data.users import User
+
+
+os.system('type nul > db/mars_explorers.db')
 
 db_session.global_init("db/mars_explorers.db")
 db_sess = db_session.create_session()
