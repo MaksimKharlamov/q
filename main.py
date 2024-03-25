@@ -43,37 +43,57 @@ def logout():
 
 @app.route('/addjob', methods=['GET', 'POST'])
 def addjob():
-    form = JobForm()
-    if form.validate_on_submit():
-        db_sess = db_session.create_session()
-        job = Job()
-        job.team_leader = form.team_leader.data
-        job.job = form.job.data
-        job.work_size = form.work_size.data
-        job.collaborators = form.collaborators.data
-        job.is_finished = form.is_finished.data
-        db_sess.merge(job)
-        db_sess.commit()
-        return redirect('/')
-    return render_template('addjob.html', title='Adding a job', form=form)
+    try:
+        form = JobForm()
+        if form.validate_on_submit():
+            db_sess = db_session.create_session()
+            job = Job()
+            job.team_leader = form.team_leader.data
+            job.job = form.job.data
+            job.work_size = form.work_size.data
+            job.collaborators = form.collaborators.data
+            job.is_finished = form.is_finished.data
+            db_sess.merge(job)
+            db_sess.commit()
+            return redirect('/')
+        return render_template('addjob.html', title='Adding a job', form=form)
+    except Exception as e:
+        return make_response(jsonify({'error': 'Bad request'}), 400)
 
 
 @app.route('/editjob/<job_id>', methods=['GET', 'POST'])
 def editjob(job_id):
-    form = JobForm()
-    if form.validate_on_submit():
+    try:
+        form = JobForm()
+        if form.validate_on_submit():
+            db_sess = db_session.create_session()
+            job = db_sess.query(Job).get(job_id)
+            if not (current_user.is_authenticated and (current_user.id == 1 or current_user.id == job.team_leader)):
+                return "недостаточно прав"
+            job.team_leader = form.team_leader.data
+            job.job = form.job.data
+            job.work_size = form.work_size.data
+            job.collaborators = form.collaborators.data
+            job.is_finished = form.is_finished.data
+            db_sess.commit()
+            return redirect('/')
+        return render_template('addjob.html', title=f'Editing a job #{job_id}', form=form)
+    except Exception as e:
+        return make_response(jsonify({'error': 'Bad request'}), 400)
+
+
+@app.route('/deletejob/<job_id>', methods=['GET', 'POST'])
+def deletejob(job_id):
+    try:
         db_sess = db_session.create_session()
         job = db_sess.query(Job).get(job_id)
         if not (current_user.is_authenticated and (current_user.id == 1 or current_user.id == job.team_leader)):
             return "недостаточно прав"
-        job.team_leader = form.team_leader.data
-        job.job = form.job.data
-        job.work_size = form.work_size.data
-        job.collaborators = form.collaborators.data
-        job.is_finished = form.is_finished.data
+        db_sess.delete(job)
         db_sess.commit()
         return redirect('/')
-    return render_template('addjob.html', title=f'Editing a job #{job_id}', form=form)
+    except Exception as e:
+        return make_response(jsonify({'error': 'Bad request'}), 400)
 
 
 @app.route('/')
