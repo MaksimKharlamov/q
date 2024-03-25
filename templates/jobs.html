@@ -2,6 +2,7 @@
 
 {% block content %}
 <h3 class="header">Works log</h3>
+<a href="/addjob" class="btn btn-secondary">Add job</a>
 {% for i in jobs %}
   <div>
     <h4>Action # {{ i[-1] }}</h4>
@@ -21,6 +22,10 @@
         <td>{{ i[4] }}</td>
       </tr>
     </table>
+    <div>
+      <a href="/editjob/{{ i[-1] }}" class="btn btn-warning">Edit job</a>
+      <a href="/deletejob/{{ i[-1] }}" class="btn btn-danger">Delete job</a>
+    </div>
   </div>
 {% endfor %}
 {% endblock %}
