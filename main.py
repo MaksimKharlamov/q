@@ -48,6 +48,8 @@ def addjob():
     try:
         form = JobForm()
         if form.validate_on_submit():
+            if not current_user.is_authenticated:
+                return "необходимо авторизоваться"
             db_sess = db_session.create_session()
             job = Job()
             job.team_leader = form.team_leader.data
