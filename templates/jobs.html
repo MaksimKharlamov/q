@@ -2,30 +2,34 @@
 
 {% block content %}
 <h3 class="header">Works log</h3>
+{% if current_user.is_authenticated %}
 <a href="/addjob" class="btn btn-secondary">Add job</a>
+{% endif %}
 {% for i in jobs %}
-  <div>
+<div>
     <h4>Action # {{ i[-1] }}</h4>
     <table class="table">
-      <tr>
-        <td>Title of activity</td>
-        <td>Team leader</td>
-        <td>Duration</td>
-        <td>List of collaborators</td>
-        <td>Is finished</td>
-      </tr>
-      <tr>
-        <td>{{ i[0] }}</td>
-        <td>{{ i[1] }}</td>
-        <td>{{ i[2] }}</td>
-        <td>{{ i[3] }}</td>
-        <td>{{ i[4] }}</td>
-      </tr>
+        <tr>
+            <td>Title of activity</td>
+            <td>Team leader</td>
+            <td>Duration</td>
+            <td>List of collaborators</td>
+            <td>Is finished</td>
+        </tr>
+        <tr>
+            <td>{{ i[0] }}</td>
+            <td>{{ i[1] }}</td>
+            <td>{{ i[2] }}</td>
+            <td>{{ i[3] }}</td>
+            <td>{{ i[4] }}</td>
+        </tr>
     </table>
     <div>
-      <a href="/editjob/{{ i[-1] }}" class="btn btn-warning">Edit job</a>
-      <a href="/deletejob/{{ i[-1] }}" class="btn btn-danger">Delete job</a>
+        {% if current_user.is_authenticated and (current_user.surname + ' ' + current_user.name == i[1] or current_user.id == 1) %}
+        <a href="/editjob/{{ i[-1] }}" class="btn btn-warning">Edit job</a>
+        <a href="/deletejob/{{ i[-1] }}" class="btn btn-danger">Delete job</a>
+        {% endif %}
     </div>
-  </div>
+</div>
 {% endfor %}
 {% endblock %}
